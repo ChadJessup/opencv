@@ -27,8 +27,21 @@ ocv_download(FILENAME ${tbb_filename}
              STATUS res
              UNPACK RELATIVE_URL)
 if(NOT res)
+  ocv_download(FILENAME "2018_U1"
+               HASH ${tbb_md5}
+               URL
+                 "${OPENCV_TBB_URL}"
+                 "$ENV{OPENCV_TBB_URL}"
+                 "https://codeload.github.com/01org/tbb/tar.gz/"
+               DESTINATION_DIR ${tbb_src_dir}
+               ID TBB
+               STATUS res
+             UNPACK RELATIVE_URL)
+endif()
+if(NOT res)
   return()
 endif()
+
 set(tbb_src_dir "${tbb_src_dir}/${tbb_subdir}")
 
 ocv_include_directories("${tbb_src_dir}/include"
